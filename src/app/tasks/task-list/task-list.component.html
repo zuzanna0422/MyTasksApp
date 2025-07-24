@@ -1,0 +1,34 @@
+<div class="tasks">
+    <app-categories (categorySelected)="onSelectedCategory($event)"/>
+    <dialog *ngIf="isAddingTask" open>
+        <app-task (taskAdded)="onStopAddingTask()" (taskCancelled)="onStopAddingTask()" />
+    </dialog>
+    <dialog *ngIf="isEditTask" open>
+        <app-edit (taskAdded)="onStopAddingTask()" (taskCancelled)="onStopAddingTask()" [taskToEdit]="currentTask"/>
+    </dialog>
+    <div class="tasks-list">
+        <button class="btn" (click)="onStartAddingTask()">Add Task</button>
+        <ul>
+        @for(task of selecetedCategoryTasks; track task.title) {
+                <div class="task">
+                    <li>
+                        <mat-checkbox (click)="onDone(task)"><h2>{{ task.title }}</h2></mat-checkbox>
+                        <div class="body-task">
+                            <h3>{{ task.description }}</h3>
+                            <p>{{  task.date | date}}</p>
+                            <p>{{ task.category }}</p>
+                        </div>
+                        <div class="control-buttons">
+                            <button mat-icon-button (click)="onDelete(task)">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <button mat-icon-button (click)="onEdit(task)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </div>
+                    </li>
+                </div>  
+        }
+        </ul>
+    </div>
+</div>

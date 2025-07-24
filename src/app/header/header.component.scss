@@ -1,0 +1,7 @@
+@use '../../styles/_variables' as variables;
+
+.logo {
+    display: flex;
+    justify-content: center;
+    color:variables.$grey;
+}

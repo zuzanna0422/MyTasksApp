@@ -1,0 +1,27 @@
+ <h2>Create Task:</h2>
+<div class="task-grid">
+            <label for="title">Title: </label>
+            <input type="text" id="title" name="title" [(ngModel)]="enteredTitle" />
+
+            <label for="description">Description: </label>
+            <textarea id="description" name="description" [(ngModel)]="enteredDescription" rows="4"></textarea>
+
+            <span class="full-row">Category:</span>
+            <label for="new-category">
+                <input type="text" id="new-category" name="new-category" [(ngModel)]="newCategory" />
+            </label>
+
+            <button class="btn" style="margin-left: 25%;"(click)="onAddCategory()">Add</button>
+
+        <p class="full-row">
+            @for(category of categories; track category) {
+            <input type="radio" name="categories" [id]="category" [value]="category" [(ngModel)]="selectedCategory">
+            <label [for]="category">{{ category }}</label><br>
+            }
+        </p>
+        <p class="center-row">
+            <button class="btn" (click)="onCancel()">Cancel</button>
+            <button class="btn" (click)="onSave()">Save</button>
+        </p>
+        
+</div>
