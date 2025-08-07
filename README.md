@@ -1,3 +1,21 @@
+# MyTasksApp – aplikacja do zarządzania zadaniami
+
+# Opis
+
+MyTasks to aplikacja do zarządzania zadaniami. Jej główne funkcjonalności to:
+
+-dodawanie, usuwanie i edytowanie zadań, które zapisywane są w Local Storage
+-przypisywanie zadań do kategorii oraz tworzenie i usuwanie własnych kategorii
+-zażądzanie statusem zadań
+
+# Czego sie nauczyłam?
+
+-obsługi formularzy i ich walidacji,
+-wykorzystywania Material Design – ikon i przycisków z Angular Material,
+-stylowania aplikacji z użyciem Sass,
+-tworzenia układu formularzy przy użyciu CSS Grid,
+-przechowywania danych w Local Storage.
+
 # MyTaskApp
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.14.

@@ -1,27 +1,37 @@
  <h2>Create Task:</h2>
-<div class="task-grid">
-            <label for="title">Title: </label>
-            <input type="text" id="title" name="title" [(ngModel)]="enteredTitle" />
+    <form class="task-grid" #form="ngForm" (ngSubmit)="onSubmit(form)">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" ngModel #title="ngModel" minlength="2" required />
+            @if((title.touched || form.submitted) && (title.invalid || form.submitted) && (title.dirty || form.submitted)) {
+                <p class="error">* Title is required and must be at least 2 characters long.</p>
+            }
 
             <label for="description">Description: </label>
-            <textarea id="description" name="description" [(ngModel)]="enteredDescription" rows="4"></textarea>
+            <textarea id="description" name="description" ngModel #description="ngModel" minlength="4" maxlength="100" rows="4"></textarea>
+            @if(description.touched && description.invalid && description.dirty) {
+                <p class="error">* Description must be at least 4 characters</p>
+            }
 
-            <span class="full-row">Category:</span>
-            <label for="new-category">
-                <input type="text" id="new-category" name="new-category" [(ngModel)]="newCategory" />
+            <span class="full-row" style="margin: 10px 0;">Category:</span>
+            <label for="new-category" style="margin: 10px 0;">
+                <input type="text" id="new-category" name="newCategory" ngModel #newCategory="ngModel" minlength="1" maxlength="10" />
             </label>
 
-            <button class="btn" style="margin-left: 25%;"(click)="onAddCategory()">Add</button>
+            <button class="btn" style="margin-left: 25%;"(click)="onAddCategory()" type="button">Add</button>
 
-        <p class="full-row">
+        <p class="full-row" style="margin: 10px 0;">
             @for(category of categories; track category) {
-            <input type="radio" name="categories" [id]="category" [value]="category" [(ngModel)]="selectedCategory">
-            <label [for]="category">{{ category }}</label><br>
+            <input type="radio" name="categories" ngModel #category="ngModel" [id]="category" [value]="category" >
+            <label [for]="category" style="width: 15%; display: inline-block;">{{ category }}</label>
+            <button mat-icon-button style="background-color: transparent; border: 0px; cursor: pointer;" (click)="onDeleteCategory(category)" type="button">
+                <mat-icon style="color: rgb(159, 159, 159); font-size: 18px; vertical-align: middle;">delete</mat-icon>
+            </button>
+            <br>
+
             }
         </p>
         <p class="center-row">
-            <button class="btn" (click)="onCancel()">Cancel</button>
-            <button class="btn" (click)="onSave()">Save</button>
+            <button class="btn" (click)="onCancel()" type="button">Cancel</button>
+            <button class="btn">Save</button>
         </p>
-        
-</div>
+</form>

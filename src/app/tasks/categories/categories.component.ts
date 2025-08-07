@@ -11,7 +11,10 @@ import { TaskService } from "../task.service";
 export class CategoriesComponent {
     private taskService = inject(TaskService);
     @Output() categorySelected = new EventEmitter<string>();
-    categories = this.taskService.categories;
+    
+    get categories() {
+        return this.taskService.categories;
+    }
 
     onFilter(categoryName: string) {
         this.categorySelected.emit(categoryName);

@@ -8,6 +8,7 @@ import { Task } from "./task.model";
 
 export class TaskService{
     private Tasks: Task[] = [];
+
     categories: string[] = ['work', 'home', 'study'];
 
     private saveTasksToLocalStorage(): void {
@@ -36,15 +37,18 @@ export class TaskService{
     }
 
     addCategory(category: string) {
-        //this.categories.push(category);
-          category = category.trim();
-
-        if (!category) return; // nie dodawaj pustych
+        category = category.trim();
+        if (!category) return;
 
         if (!this.categories.includes(category)) {
             this.categories.push(category);
-            this.saveCategoriesToLocalStorage(); // zapisz do localStorage
+            this.saveCategoriesToLocalStorage();
         }
+    }
+
+    deleteCategory(category: string) {
+        this.categories = this.categories.filter(cat => cat !== category);
+        this.saveCategoriesToLocalStorage();
     }
 
     deleteTask(taskToDelete: Task) {
@@ -53,7 +57,7 @@ export class TaskService{
     }
     
     markAsDoneTask(task: Task) {
-        task.status = 'DONE';
+        task.status = task.status === 'TO-DO' ? 'DONE' : 'TO-DO';
         this.saveTasksToLocalStorage();
     }
 
@@ -62,7 +66,7 @@ export class TaskService{
             return this.allTask;
         }
         else {
-            return [...this.Tasks.filter((el) => el.category === category)];
+            return this.allTask.filter((el) => el.category === category);
         }
     
     }
@@ -72,7 +76,6 @@ export class TaskService{
         if (index !== -1) {
         this.Tasks[index] = { ...editedTask };
         this.saveTasksToLocalStorage();
-    }
-
+        }
     }
 }

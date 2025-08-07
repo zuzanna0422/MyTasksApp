@@ -1,12 +1,13 @@
-import { Component, EventEmitter, inject, Input, Output } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { Component, EventEmitter, inject, Input, Output, viewChild } from "@angular/core";
+import { FormControl, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Task, TaskStatus } from "../task.model";
 import { TaskService } from "../task.service";
 import { CommonModule } from "@angular/common";
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
     selector: 'app-task',
-    imports: [FormsModule, CommonModule],
+    imports: [FormsModule, CommonModule, ReactiveFormsModule, MatIconModule],
     templateUrl: './task.component.html',
     styleUrl: './task.component.scss'
 })
@@ -15,41 +16,54 @@ export class TaskComponent {
     private taskService = inject(TaskService);
     @Output() taskAdded = new EventEmitter<Task>();
     @Output() taskCancelled = new EventEmitter<void>();
-    categories = this.taskService.categories;
-
-    enteredTitle = '';
-    enteredDescription = '';
-    Status: TaskStatus = 'TO-DO';
-    selectedCategory = '';
-    newCategory = '';
+    private form = viewChild<NgForm>('form');
+    
+    get categories() {
+        return this.taskService.categories;
+    }
 
 
-    onSubmit() {
+    onSubmit(formData: NgForm) {
+        if(formData.form.invalid){
+            return;
+        }
+        const enteredTitle = formData.form.value.title?.trim();
+        const enteredDescription = formData.form.value.description?.trim();
+        const selectedCategory = formData.form.value.categories;
+
+        console.log('Entered Title:', enteredTitle);
+        console.log('Entered Description:', enteredDescription);
+    
+
         const newTask: Task = {
-            title: this.enteredTitle,
-            description: this.enteredDescription,
-            category: this.selectedCategory,
+            title: enteredTitle,
+            description: enteredDescription,
+            category: selectedCategory,
             status: 'TO-DO',
             date: new Date(),
         }
-
+        console.log('New Task:', newTask);
         this.taskService.addTask(newTask);
 
-        this.enteredTitle = '';
-        this.enteredDescription = '';
+        this.taskAdded.emit(newTask);
+        formData.resetForm();
     }
     onCancel() {
         this.taskCancelled.emit();
-        this.enteredTitle = '';
-        this.enteredDescription = '';
-    }
-    onSave() {
-        this.onSubmit();
-        this.taskAdded.emit();
+        this.form()?.resetForm();
     }
     onAddCategory() {
-        this.newCategory = this.newCategory.trim();
-        this.taskService.addCategory(this.newCategory);
-        this.newCategory = '';
+        const newCategory = this.form()?.value.newCategory?.trim() || '';
+        
+        if (newCategory) {
+            this.taskService.addCategory(newCategory);
+            if (this.form()?.controls['newCategory']) {
+                this.form()?.controls['newCategory'].reset();
+            }
+        }
+    }
+
+    onDeleteCategory(category: string) {
+        this.taskService.deleteCategory(category);
     }
 }

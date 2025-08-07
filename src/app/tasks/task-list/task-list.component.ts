@@ -8,6 +8,8 @@ import { EditComponent } from "../edit/edit.component";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
+import { MatTab } from "@angular/material/tabs";
+import { MatTableModule } from "@angular/material/table";
 
 @Component({
     selector: 'app-task-list',
@@ -19,6 +21,7 @@ import { MatIconModule } from "@angular/material/icon";
       EditComponent, 
       MatCheckboxModule,
       MatButtonModule,
+      MatTableModule,
     MatIconModule],
     templateUrl: './task-list.component.html',
     styleUrl: './task-list.component.scss'
@@ -39,8 +42,12 @@ export class TaskListComponent {
         this.selectedCategory = category;
     }
 
-    get selecetedCategoryTasks() {
-        return this.taskService.getFilteredTask(this.selectedCategory)
+    get TODOTasks() {
+        return this.taskService.getFilteredTask(this.selectedCategory).filter(task => task.status === 'TO-DO');
+    }
+
+    get DONETasks() {
+        return this.taskService.getFilteredTask(this.selectedCategory).filter(task => task.status === 'DONE');
     }
 
     onDelete(task: Task) {
