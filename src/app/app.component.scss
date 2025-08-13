@@ -1,0 +1,5 @@
+@use '../styles/theme' as *;
+
+:host-context(.dark-theme) {
+  @include apply-theme($dark-theme);
+}

@@ -4,17 +4,40 @@
 
 MyTasks to aplikacja do zarządzania zadaniami. Jej główne funkcjonalności to:
 
--dodawanie, usuwanie i edytowanie zadań, które zapisywane są w Local Storage
--przypisywanie zadań do kategorii oraz tworzenie i usuwanie własnych kategorii
--zażądzanie statusem zadań
+-dodawanie, usuwanie i edytowanie zadań,
+-zapisywane danych do Local Storage,
+-przypisywanie zadań do kategorii oraz tworzenie i usuwanie własnych kategorii,
+-zarządzanie statusem zadań,
+-zmiana motywu interfejsu użytkownika(light/dark theme)
 
-# Czego sie nauczyłam?
+# Czego sie nauczyłam:
 
--obsługi formularzy i ich walidacji,
--wykorzystywania Material Design – ikon i przycisków z Angular Material,
+-obsługi formularzy i walidacja danych,
+-wykorzystania Angular Material do budowy nowoczesnego UI,
 -stylowania aplikacji z użyciem Sass,
 -tworzenia układu formularzy przy użyciu CSS Grid,
--przechowywania danych w Local Storage.
+-przechowywania danych po stronie przeglądarki z użyciem Local Storage,
+
+# MyTasksApp – Task Management Application
+
+# Description
+
+MyTasks is a web application built with Angular for managing tasks.
+Key features:
+
+-adding, deleting, and editing tasks,
+-storing data in Local Storage,
+-assigning tasks to categories as well as creating and deleting custom categories,
+-managing task statuses,
+-switching between light and dark UI themes,
+
+# What I Learned?
+
+-handling forms and data validation in Angular,
+-using Angular Material to build a modern UI,
+-styling the application with Sass,
+-designing form layouts with CSS Grid,
+-storing application data in the browser using Local Storage,
 
 # MyTaskApp
 

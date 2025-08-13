@@ -1,0 +1,131 @@
+@use '_variables' as variables;
+
+@mixin color-theme($bg-color, $categories-btn-bg, $categories-text, $edit-btn-bg, $edit-btn-color, $edit-color) {
+    body {
+        background-color: $bg-color;
+    }
+    .logo {
+        color: $categories-text;
+    }
+
+    .header .btn {
+        background-color: $categories-text;
+        color: $bg-color;
+    }
+    .categories button{
+        color: $categories-text;
+        background-color: $categories-btn-bg;
+    }
+    .categories h3 {
+        color: $categories-text;
+    }
+    .edit button{
+        background-color: $edit-btn-bg;
+        color: $edit-btn-color;
+    }
+    .edit {
+        color: $edit-color;
+    }
+    .edit input[type="text"], textarea {
+        border: thin $edit-color solid;
+    }
+    .edit input[type="text"]:focus, .edit textarea:focus {
+        border: thin $edit-btn-bg solid;
+    }
+
+    dialog[open] {
+        background-color: $categories-btn-bg;
+    }
+
+    .task-edit {
+        color: $categories-text;
+    }
+
+    .task-create {
+        color: $categories-text;
+    }
+    .form {
+        color: $categories-text;
+        background-color: $categories-btn-bg;
+
+        button {
+            background-color: $edit-btn-bg;
+            color: $edit-btn-color;
+        }
+        input[type="text"], textarea {
+            border: thin $edit-color solid;
+        }
+        input[type="text"]:focus, textarea:focus {
+            border: thin $edit-btn-bg solid;
+        }
+        .error {
+            color: red;
+        }
+    }
+    .tasks {
+        .tasks-list {
+            background-color: $categories-btn-bg;
+            color: $categories-text;
+
+            h2 {
+                color: $categories-text;
+            }
+
+            .task {
+                border: 3px dashed $edit-btn-bg;
+                color: $edit-color;
+            }
+
+            .done-task {
+                background-color: #d6d6d6;
+            }
+
+            button {
+                background-color: $edit-btn-bg;
+                color: $edit-btn-color;
+            }
+
+            dialog[open] {
+                background-color: $categories-btn-bg;
+                color: $categories-text;
+            }
+        }
+    }
+}
+
+$light-theme: (
+    bg-color: #dddddd,
+    categories-btn-bg: variables.$white,
+    categories-text: variables.$grey,
+    edit-btn-bg: variables.$blue,
+    edit-btn-color: variables.$white,
+    edit-color: variables.$grey,
+);
+
+$dark-theme: (
+    bg-color: #000000,
+    categories-btn-bg: variables.$dark-grey,
+    categories-text: variables.$white,
+    edit-btn-bg: variables.$blue,
+    edit-btn-color: variables.$white,
+    edit-color: variables.$white,
+);
+
+@mixin apply-theme($theme) {
+  @include color-theme(
+    map-get($theme, bg-color),
+    map-get($theme, categories-btn-bg),
+    map-get($theme, categories-text),
+    map-get($theme, edit-btn-bg),
+    map-get($theme, edit-btn-color),
+    map-get($theme, edit-color)
+  );
+}
+
+.light-theme {
+  @include apply-theme($light-theme);
+}
+
+.dark-theme {
+  @include apply-theme($dark-theme);
+}

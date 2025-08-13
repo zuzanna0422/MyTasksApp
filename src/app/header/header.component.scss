@@ -1,7 +1,31 @@
 @use '../../styles/_variables' as variables;
+@use '../../styles/theme' as *;
+@use '../../styles/button' as button;
+
+:host-context(.dark-theme) {
+  @include apply-theme($dark-theme);
+}
 
 .logo {
     display: flex;
     justify-content: center;
-    color:variables.$grey;
+}
+
+.btn {
+  font-size: 16px;
+  max-width: 200px;
+  max-height: 40px;
+  font-weight: 500; 
+  display: flex;
+  justify-self: end;
+}
+
+.icon-text {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon-text mat-icon {
+  font-size: 20px;
 }

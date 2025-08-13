@@ -1,17 +1,20 @@
 @use '../../../styles/_variables' as variables;
 @use '../../../styles/_button' as button;
+@use '../../../styles/theme' as *;
+
+:host-context(.dark-theme) {
+  @include apply-theme($dark-theme);
+}
+
 
 .tasks-list {
     width: 100%;
     min-height: 300px;
-    background-color: variables.$white;
-    color: variables.$grey;
     border-radius: 15px;
     padding: 10px;
 }
 
 .task {
-    border: 3px, variables.$blue, dashed;
     border-radius: 20px;
     margin: 20px;
     padding: 20px;
@@ -19,19 +22,10 @@
     font-size: smaller;
 }
 
-.done-task{
-    background-color: #d6d6d6;
-}
-
 ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
-}
-
-button {
-  color: variables.$white;
-  background-color: variables.$blue;
 }
 
 .control-buttons {
@@ -44,13 +38,14 @@ button {
     margin-left: 46px;
 }
 
-dialog {
+dialog[open] {
+    z-index: 1000;
+    overflow: auto;
     width: 90%;
     max-width: 30rem;
     border-radius: 6px;
     border: none;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
-    overflow: hidden;
+    box-shadow: 0 2px 20px 5px rgba(0, 0, 0, 0.4);
     padding: 1rem;
     top: 5rem;
 }

@@ -1,0 +1,31 @@
+@use './styles/theme' as *;
+
+.dark-theme {
+  @include apply-theme($dark-theme);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+
+body {
+  font-family: sans-serif;
+  //background-color: #dddddd;
+  margin: 50px 200px;
+  padding: 2% 5%;
+  height: 100%;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+

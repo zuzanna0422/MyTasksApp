@@ -30,9 +30,6 @@ export class TaskComponent {
         const enteredTitle = formData.form.value.title?.trim();
         const enteredDescription = formData.form.value.description?.trim();
         const selectedCategory = formData.form.value.categories;
-
-        console.log('Entered Title:', enteredTitle);
-        console.log('Entered Description:', enteredDescription);
     
 
         const newTask: Task = {
@@ -42,15 +39,20 @@ export class TaskComponent {
             status: 'TO-DO',
             date: new Date(),
         }
-        console.log('New Task:', newTask);
+
         this.taskService.addTask(newTask);
 
         this.taskAdded.emit(newTask);
         formData.resetForm();
     }
     onCancel() {
+        const currentForm = this.form()?.form;
+
+        if (currentForm?.dirty && currentForm?.value.title.trim() || currentForm?.value.description.trim()) {
+            confirm('Are you sure you want to cancel? All changes will be lost.');
+        }
         this.taskCancelled.emit();
-        this.form()?.resetForm();
+        currentForm?.reset();
     }
     onAddCategory() {
         const newCategory = this.form()?.value.newCategory?.trim() || '';

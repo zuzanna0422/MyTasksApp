@@ -1,4 +1,10 @@
 @use '../../../styles/_variables' as variables;
+@use '../../../styles/theme' as *;
+
+:host-context(.dark-theme) {
+  @include apply-theme($dark-theme);
+}
+
 
 .categories{
   display: flex;
@@ -8,15 +14,10 @@ button {
   margin: 10px;
   font: inherit;
   cursor: pointer;
-  background-color: variables.$white;
   border-radius: 20px;
   border: none;
   padding: 0.35rem 0.8rem;
   font-size: small;
-}
-
-h3 {
-  color: variables.$grey;
 }
 
 .control {
